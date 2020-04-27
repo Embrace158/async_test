@@ -90,7 +90,6 @@ async def download(url):
 
 
 if __name__ == '__main__':
-    sem = asyncio.Semaphore(500)
     start_url='https://c.m.163.com/ug/api/wuhan/app/data/list-total'
     loop = asyncio.get_event_loop()
     loop.run_until_complete(download(start_url))
