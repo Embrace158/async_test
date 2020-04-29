@@ -77,9 +77,10 @@ async def parse(html):
     Data.to_csv('热门视频数据.csv', mode='a', header=False, index=False,sep=',' ,encoding='utf-8-sig')
 
 async def download(url,sem):
-    async with aiohttp.ClientSession() as session:
-        html = await fetch(session, url)
-        await parse(html)
+    async with sem:
+        async with aiohttp.ClientSession() as session:
+            html = await fetch(session, url)
+            await parse(html)
 
 if __name__ == '__main__':
     loop = asyncio.get_event_loop()
